@@ -1,0 +1,161 @@
+// Bulmaのベースユーティリティ（変数等）
+@import "~bulma/sass/utilities/_all";
+
+// Typography -------------------------
+
+// ↓追加フォントなどの外部CSSは、core.scssかnuxt.config.jsで読み込む
+// YakuHanMP: https://cdn.jsdelivr.net/npm/yakuhanjp@3.0.0/dist/css/yakuhanmp.min.css
+// Noto Serif JP: https://fonts.googleapis.com/css?family=Noto+Serif+JP:400,700&amp;subset=japanese
+
+// 日本語用設定 sans-serifしかないので、serif書体も追加しておく
+$family-sans-serif: "Noto Sans JP", sans-serif;
+$family-serif: "Noto Serif JP", serif;
+
+//フォントサイズを登録 -------------------------
+
+// 16pxを基準にremで調整(Doc：http://www.standardista.com/px-to-rem-conversion-if-root-font-size-is-16px/)
+$body-size: 16px !default;
+
+// 日本語でよく使われるサイズに変更
+$size-1: 2.5rem; // 40px
+$size-2: 2rem; // 32px
+$size-3: 1.5rem; // 24px
+$size-4: 1.25rem; // 20px
+$size-5: 1rem; // 16px
+$size-6: 0.875rem; // 14px
+$size-7: 0.75rem; // 12px
+$size-8: 0.65rem; // 10px
+
+// 基本のフォントサイズを設定
+$size-small: $size-7;
+$size-normal: $size-5;
+$size-medium: $size-4;
+$size-large: $size-3;
+
+$body-line-height: 1.7;
+
+
+// brakepoints -------------------------------
+
+// breakpoints
+// LG G3など、5.5incタイプの大型スマートフォン
+$min-sp: 374px;
+// 横向きと定義（iphone5の縦サイズ）
+$landscape: 568px;
+$large-sp: 600px;
+$tablet: 768px;
+$large-tablet: 1024px;
+$desktop: 1200px;
+// MackBook 12/Pro 13/Surface2/3/Pro/Nexus10
+$widescreen: 1360px;
+$widescreen-enabled: true !default;
+$fullhd: 1344px + (2 * $gap) !default;
+$fullhd-enabled: true !default;
+
+// breakpointsメモ
+// @include mobile {}          //until 666px
+// @include tablet {}          //from 667px
+// @include tablet-only {}     //from 667px and until 969px
+// @include touch {}           //until 969px
+// @include desktop {}         //from 970px
+// @include desktop-only {}    //from 970px and until 1359px
+// @include widescreen {}      //from 1360px
+// @include widescreen-only {} //from 1360px and until 1407px
+// @include fullhd {}          /from 1408px
+
+// add Mixin
+@mixin wrapper {
+	box-sizing: border-box;
+	position: relative;
+	width: 100%;
+	padding-right: $bm * 2;
+	padding-left: $bm * 2;
+	@include tablet {
+		padding-right: $bm * 3;
+		padding-left: $bm * 3;
+	}
+	@include desktop {
+		margin-right: auto;
+		margin-left: auto;
+		max-width: $widescreen;
+		padding-right: $bm * 4;
+		padding-left: $bm * 4;
+	}
+	@include fullhd {
+		max-width: $fullhd - 2 * $gap;
+		width: $fullhd - 2 * $gap;
+	}
+}
+
+@mixin clearfix {
+	zoom: 1;
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+@mixin text_indent {
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+// color-variable ------------------------------------
+// secondary、thirdlyを追加して、カスタムカラーの幅を増やしています
+
+// 明るい色・暗い色
+$light: #efefef;
+$light-lighten: lighten($light, 15%);
+$light-darken: darken($light, 5%);
+
+$dark: #3C3C48;
+$dark-lighten: lighten($dark, 10%);
+$dark-darken: darken($dark, 10%);
+
+// primary (ブランドカラー)
+$primary: #0E6934;
+$primary-invert: findColorInvert($primary);
+$primary-lighten: lighten($primary, 15%);
+$primary-darken: darken($primary, 5%);
+
+// secondary（ポイントカラー ※カスタム）
+$secondary: #AF7256;
+$secondary-invert: findColorInvert($secondary);
+$secondary-lighten: lighten($secondary, 15%);
+$secondary-darken: darken($secondary, 5%);
+
+// thirdary（※カスタム）
+$thirdly: #DEE5EE;
+$thirdly-invert: findColorInvert($thirdly);
+$thirdly-lighten: #EBF0F4;
+$thirdly-darken: darken($thirdly, 5%);
+
+// 上記カラーを使えるようにする
+$custom-colors: (
+	"secondary": ($secondary, $secondary-invert),
+	"thirdly": ($thirdly, $thirdly-invert)
+);
+
+$colors: mergeColorMaps((
+	"white": ($white, $black),
+	"black": ($black, $white),
+	"light": ($light, $light-invert),
+	"dark": ($dark, $dark-invert),
+	"primary": ($primary, $primary-invert),
+	"link": ($link, $link-invert),
+	"info": ($info, $info-invert),
+	"success": ($success, $success-invert),
+	"warning": ($warning, $warning-invert),
+	"danger": ($danger, $danger-invert)
+), $custom-colors);
+
+// グラデーション
+@mixin gradient {
+	background: $primary;
+	background: linear-gradient(to right, #35B8CB 10%,$primary 90%);
+}
