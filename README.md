@@ -1,4 +1,4 @@
-# nextjs-template
+# nuxtjs-template
 Nuxt.js, SCSS, Pug, PWA  
 
 ## Installation
