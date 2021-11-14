@@ -1,21 +1,20 @@
-# nuxtjs-template
-Nuxt.js, SCSS, Pug, PWA  
+# template_ver02
 
-## Installation
+## Build Setup
 
-    $ git clone https://github.com/115design/nuxtjs-template.git
-    $ cd nuxtjs-template
-    $ yarn install
-    $ yarn dev
-      or
-    $ yarn start
+```bash
+# install dependencies
+$ npm install
 
-Nuxt.js: http://localhost:3000
+# serve with hot reload at localhost:3000
+$ npm run dev
 
-## Author
+# build for production and launch server
+$ npm run build
+$ npm run start
 
-[115design](http://115design.main.jp/)
+# generate static project
+$ npm run generate
+```
 
-## Licence
-
-[MIT](https://opensource.org/licenses/MIT)
+For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

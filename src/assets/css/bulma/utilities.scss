@@ -65,8 +65,8 @@ $fullhd-enabled: true !default;
 
 // add Mixin
 @mixin wrapper {
-	box-sizing: border-box;
 	position: relative;
+	box-sizing: border-box;
 	width: 100%;
 	padding-right: $bm * 2;
 	padding-left: $bm * 2;
@@ -75,34 +75,34 @@ $fullhd-enabled: true !default;
 		padding-left: $bm * 3;
 	}
 	@include desktop {
-		margin-right: auto;
-		margin-left: auto;
 		max-width: $widescreen;
 		padding-right: $bm * 4;
 		padding-left: $bm * 4;
+		margin-right: auto;
+		margin-left: auto;
 	}
 	@include fullhd {
-		max-width: $fullhd - 2 * $gap;
 		width: $fullhd - 2 * $gap;
+		max-width: $fullhd - 2 * $gap;
 	}
 }
 
 @mixin clearfix {
 	zoom: 1;
-	&:before,
-	&:after {
-		content: "";
+	&::before,
+	&::after {
 		display: table;
+		content: "";
 	}
-	&:after {
+	&::after {
 		clear: both;
 	}
 }
 
 @mixin text_indent {
+	overflow: hidden;
 	text-indent: 100%;
 	white-space: nowrap;
-	overflow: hidden;
 }
 
 // color-variable ------------------------------------
@@ -119,43 +119,18 @@ $dark-darken: darken($dark, 10%);
 
 // primary (ブランドカラー)
 $primary: #0E6934;
-$primary-invert: findColorInvert($primary);
+$primary-invert: findcolorinvert($primary);
 $primary-lighten: lighten($primary, 15%);
 $primary-darken: darken($primary, 5%);
 
 // secondary（ポイントカラー ※カスタム）
 $secondary: #AF7256;
-$secondary-invert: findColorInvert($secondary);
+$secondary-invert: findcolorinvert($secondary);
 $secondary-lighten: lighten($secondary, 15%);
 $secondary-darken: darken($secondary, 5%);
 
 // thirdary（※カスタム）
 $thirdly: #DEE5EE;
-$thirdly-invert: findColorInvert($thirdly);
+$thirdly-invert: findcolorinvert($thirdly);
 $thirdly-lighten: #EBF0F4;
 $thirdly-darken: darken($thirdly, 5%);
-
-// 上記カラーを使えるようにする
-$custom-colors: (
-	"secondary": ($secondary, $secondary-invert),
-	"thirdly": ($thirdly, $thirdly-invert)
-);
-
-$colors: mergeColorMaps((
-	"white": ($white, $black),
-	"black": ($black, $white),
-	"light": ($light, $light-invert),
-	"dark": ($dark, $dark-invert),
-	"primary": ($primary, $primary-invert),
-	"link": ($link, $link-invert),
-	"info": ($info, $info-invert),
-	"success": ($success, $success-invert),
-	"warning": ($warning, $warning-invert),
-	"danger": ($danger, $danger-invert)
-), $custom-colors);
-
-// グラデーション
-@mixin gradient {
-	background: $primary;
-	background: linear-gradient(to right, #35B8CB 10%,$primary 90%);
-}

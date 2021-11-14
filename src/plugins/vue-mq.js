@@ -6,14 +6,14 @@ Vue.use(VueMq, {
 		miniMobile: 375,
 		mobile: 666,
 		tablet: 969,
-		desktop: Infinity
+		desktop: Infinity,
 		// fullhd: Infinity,
 	},
-	defaultBreakpoint: 'mobile'
+	defaultBreakpoint: 'mobile',
 });
 
 Vue.mixin({
-	data () {
+	data() {
 		return {
 			// until 375px
 			miniMobile: false,
@@ -24,23 +24,23 @@ Vue.mixin({
 			// from 667px
 			tablet: false,
 			// from 769px
-			desktop: false
+			desktop: false,
 		};
 	},
 	watch: {
-		$mq () {
+		$mq() {
 			this.miniMobile = this.$mq === 'miniMobile';
 			this.mobile = this.$mq === 'mobile';
 			this.tabletOnly = this.$mq === 'tablet';
 			this.tablet = this.$mq === 'tablet' || this.$mq === 'desktop';
 			this.desktop = this.$mq === 'desktop';
-		}
+		},
 	},
-	mounted () {
+	mounted() {
 		this.miniMobile = this.$mq === 'miniMobile';
 		this.mobile = this.$mq === 'mobile';
 		this.tabletOnly = this.$mq === 'tablet';
 		this.tablet = this.$mq === 'tablet' || this.$mq === 'desktop';
 		this.desktop = this.$mq === 'desktop';
-	}
+	},
 });

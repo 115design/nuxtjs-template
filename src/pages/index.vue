@@ -3,49 +3,44 @@ div.container.toTop
 	Loading
 	MHeader
 	main
+		.container
 
 	PageTopButton
 	MFooter
 
 </template>
 
-<style lang="scss" scoped>
-// 1024px以上
-@media only screen and ( min-width: $large-tablet ) {
-
-}
-
-// 1200px以上
-@media only screen and ( min-width: $desktop ) {
-
-}
-
-</style>
-
 <script>
 // import moment from 'moment';
 // import debounce from 'lodash/debounce';
-import 'swiper/css/swiper.css';
 
 export default {
-	data () {
+	middleware(context) {},
+	data() {
+		return {};
+	},
+	head() {
 		return {
+			title: 'タイトル',
+			meta: [
+				{ hid: 'description', name: 'description', content: '説明' },
+				{ hid: 'keywords', name: 'keywords', content: 'キーワード' },
+			],
 		};
 	},
-	middleware (context) {
-
-	},
-	async mounted () {
+	async mounted() {
 		const self = this;
+
+		await self.$delay(0);
 
 		if (process.browser && window.localStorage) {
 			window.localStorage.removeItem('vuex-storage');
 		}
 
-		let poorPerformanceBrowser = false;
-		// 低性能ブラウザ判定
-		if ((/internet explorer/i).test(self.$ua.browser())) {
-			poorPerformanceBrowser = true;
+		// let poorPerformanceBrowser = false;
+		// 低性能ブラウザ判定;
+		if (/internet explorer/i.test(self.$ua.browser())) {
+			// poorPerformanceBrowser = true;
 		}
 
 		// スクロールアニメーション
@@ -53,7 +48,7 @@ export default {
 
 		// window.addEventListener('resize', self.handleResize);
 	},
-	beforeDestroy () {
+	beforeDestroy() {
 		const self = this;
 
 		self.$scrollmagic.removeScene(self.sceneArray);
@@ -64,14 +59,15 @@ export default {
 		// 	self.justyfy();
 		// }, 150),
 	},
-	head () {
-		return {
-			title: 'タイトル',
-			meta: [
-				{ hid: 'description', name: 'description', content: '説明' },
-				{ hid: 'keywords', name: 'keywords', content: 'キーワード' }
-			],
-		};
-	}
 };
 </script>
+
+<style lang="scss" scoped>
+// 1024px以上
+@media only screen and (min-width: $large-tablet) {
+}
+
+// 1200px以上
+@media only screen and (min-width: $desktop) {
+}
+</style>

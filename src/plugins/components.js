@@ -13,6 +13,6 @@ Vue.mixin({
 		MNavigation,
 		MFooter,
 		Loading,
-		PageTopButton
-	}
+		PageTopButton,
+	},
 });

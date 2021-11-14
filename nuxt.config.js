@@ -1,5 +1,3 @@
-const webpack = require('webpack');
-
 const pageTransitionIntegrityCheck = false;
 
 // path
@@ -7,7 +5,7 @@ const prodUrl = 'https://www.nuxt.jp';
 const prodRegexUrl = 'nuxt.jp';
 const baseDir = '/nuxt/';
 
-const themeColor = '#0E6934';
+const themeColor = '#00afcc';
 
 // 環境切り替え
 const basePath = prodUrl + baseDir;
@@ -21,7 +19,7 @@ const siteDesc = '説明文';
 const siteKeywords = 'キーワード';
 
 // images
-const iconImages = baseDir + 'img/icons/';
+// const iconImages = baseDir + 'img/icons/';
 const ogpImages = basePath + 'img/ogp/';
 
 // pwa
@@ -29,7 +27,7 @@ const shortName = 'NUXT';
 const manifestIcon = 'img/icons/icon-1024.png';
 // const splashscreens = baseDir + 'img/splashscreens/';
 
-module.exports = {
+export default {
 	telemetry: false,
 	env: {
 		baseDir: baseDir,
@@ -39,34 +37,40 @@ module.exports = {
 		devName: devName,
 		pageTransitionIntegrityCheck: pageTransitionIntegrityCheck,
 	},
-	mode: 'universal',
+
+	// Target: https://go.nuxtjs.dev/config-target
+	target: 'static',
+
+	srcDir: 'src/',
+
 	router: {
 		base: baseDir,
-		middleware: ['pages']
+		middleware: ['pages'],
+		trailingSlash: true,
 	},
-	srcDir: 'src/',
-	/*
-	** Headers of the page
-	*/
+
+	// Global page headers: https://go.nuxtjs.dev/config-head
 	head: {
 		htmlAttrs: {
 			prefix: 'og: http://ogp.me/ns#',
-			lang: lang
+			lang: lang,
 		},
-		titleTemplate: `%s - ${siteName}`,
-		// 'title': process.env.npm_package_name || '',
+		titleTemplate: `%s`,
 		meta: [
 			// 設定関連
 			{ charset: 'utf-8' },
-			{ 'http-equiv': 'x-ua-compatible', content: 'ie=edge' },
+			{ 'http-equiv': 'x-ua-compatible', 'content': 'ie=edge' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
-			{ name: 'format-detection', content: 'telephone=no, email=no, address=no' },
+			{
+				name: 'format-detection',
+				content: 'telephone=no, email=no, address=no',
+			},
 
 			// SEO関連
 			{ hid: 'description', name: 'description', content: siteDesc },
 			{ hid: 'keywords', name: 'keywords', content: siteKeywords },
 
-			// ogp関連
+			// OGP関連
 			{ hid: 'og:site_name', property: 'og:site_name', content: siteName },
 			{ hid: 'og:type', property: 'og:type', content: 'website' },
 			{ hid: 'og:url', property: 'og:url', content: basePath },
@@ -78,73 +82,57 @@ module.exports = {
 			// {'property': 'article:publisher', 'content': 'FacebookURL'},
 			// {'property': 'fb:app_id', 'content': 'FacebookAppID'}
 
-			// pwa iOS
+			// PWA iOS
 			{ name: 'apple-mobile-web-app-capable', content: 'yes' },
-			{ name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' }
+			{
+				name: 'apple-mobile-web-app-status-bar-style',
+				content: 'black-translucent',
+			},
 		],
 		script: [
 			// polifills
-			{ src: '//polyfill.io/v3/polyfill.min.js?features=IntersectionObserver' }
+			{ src: '//polyfill.io/v3/polyfill.min.js?features=IntersectionObserver' },
 		],
 		link: [
-			// fonts
-			// { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap&subset=japanese' },
-			// { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Noto+Serif+JP&display=swap&subset=japanese' },
+			{ rel: 'icon', type: 'image/x-icon', href: baseDir + 'favicon.ico' },
+			{
+				rel: 'apple-touch-icon',
+				sizes: '180x180',
+				href: baseDir + '/apple-touch-icon.png',
+			},
+		],
+	},
 
-			// icons
-			{ rel: 'icon', sizes: '16x16', type: 'image/png', href: iconImages + 'favicon-16.png' },
-			{ rel: 'icon', sizes: '32x32', type: 'image/png', href: iconImages + 'favicon-32.png' },
-			{ rel: 'icon', sizes: '48x48', type: 'image/png', href: iconImages + 'favicon-48.png' },
-			{ rel: 'icon', sizes: '62x62', type: 'image/png', href: iconImages + 'favicon-62.png' },
-			{ rel: 'icon', sizes: '144x144', type: 'image/png', href: iconImages + 'favicon-144.png' },
-
-			// apple touch icon
-			{ rel: 'apple-touch-icon', sizes: '180x180', href: iconImages + 'apple-touch-icon.png' }
-		]
-	},
-	manifest: {
-		lang: lang,
-		name: siteName,
-		short_name: shortName,
-		description: siteDesc,
-		background_color: '#ffffff',
-		theme_color: themeColor,
-		display: 'standalone',
-		orientation: 'portrait'
-	},
-	icon: {
-		iconFileName: manifestIcon
-	},
 	/*
-	** Customize the progress-bar color
-	*/
+	 ** Customize the progress-bar color
+	 */
 	loading: { color: themeColor },
-	/*
-	** Global CSS
-	*/
+
+	// Global CSS: https://go.nuxtjs.dev/config-css
 	css: [
 		// Bulma Doc: https://bulma.io/documentation/
 		'~/assets/css/bulma/core.scss',
 		// Common
 		'~/assets/css/site/common.scss',
 		// Transition
-		'~/assets/css/transition/basic.scss'
+		'~/assets/css/transition/basic.scss',
 	],
+
 	pageTransition: {
 		name: 'fade-right',
-		mode: 'out-in'
+		mode: 'out-in',
 	},
 	layoutTransition: {
 		name: 'fade-right',
-		mode: 'out-in'
+		mode: 'out-in',
 	},
-	/*
-	** Plugins to load before mounting the App
-	*/
+
+	// Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 	plugins: [
 		// 基本
 		'~/plugins/vue-scrollto',
 		'~/plugins/vue-mq',
+
 		// store の永続化
 		// { src: '~/plugins/cookie-storage.js', ssr: false },
 		{ src: '~/plugins/local-storage.js', ssr: false },
@@ -159,8 +147,8 @@ module.exports = {
 		// スクロールアニメーション
 		{ src: '~/plugins/vue-scrollmagic.js', ssr: false },
 
-		// シンプルアコーディオン
-		{ src: '~/plugins/vue-slide-up-down.js' },
+		// // シンプルアコーディオン
+		// { src: '~/plugins/vue-slide-up-down.js' },
 
 		// トラッキング
 		{ src: '~plugins/utag.js', ssr: false },
@@ -174,29 +162,46 @@ module.exports = {
 		// カスタムディレクティブ
 		// '~/plugins/directive'
 	],
-	/*
-	** Nuxt.js dev-modules
-	*/
+
+	// Auto import components: https://go.nuxtjs.dev/config-components
+	components: true,
+
+	// Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
 	buildModules: [
+		// https://go.nuxtjs.dev/eslint
+		'@nuxtjs/eslint-module',
+		// https://go.nuxtjs.dev/stylelint
+		'@nuxtjs/stylelint-module',
+		'@nuxtjs/style-resources',
 	],
-	/*
-	** Nuxt.js modules
-	*/
+
+	styleResources: {
+		scss: ['~/assets/css/bulma/utilities.scss'],
+	},
+
+	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
 		// Doc: https://buefy.github.io/#/documentation
 		['nuxt-buefy', { css: false }],
 		// '@nuxtjs/axios',
 		'@nuxtjs/style-resources',
+		// https://go.nuxtjs.dev/pwa
 		'@nuxtjs/pwa',
-		// ['@nuxtjs/google-analytics', {' id': 'UA-XXXXXX-X' }],
-		// ['@nuxtjs/google-tag-manager', { id: 'UA-XXXXXX-X' }],
+		// '@nuxtjs/gtm',
 		'@nuxtjs/sitemap',
 		// 'cookie-universal-nuxt',
-		'nuxt-user-agent'
+		'nuxt-user-agent',
 	],
+
+	gtm: {
+		id: 'GTM-XXXXXXX',
+		pageTracking: true,
+		enabled: true, // 常に（npm run devの場合も）GTMイベントを送信
+	},
+
 	sitemap: {
 		hostname: basePath,
-		cacheTime: 1000 * 60 * 15
+		cacheTime: 1000 * 60 * 15,
 		// 'gzip': true,
 		// 'exclude': [
 		//   含めたくないディレクトリがあれば追加
@@ -205,79 +210,77 @@ module.exports = {
 		//   自動生成ページがあれば追加
 		// ]
 	},
-	// styleResources内でutilities.scssを読み込む
-	styleResources: {
-		scss: [
-			'~/assets/css/bulma/utilities.scss'
-		]
-	},
-	/*
-	** Build configuration
-	*/
-	build: {
-		/*
-		** You can extend webpack config here
-		*/
-		extend (config, { isServer }) {
-			const vueLoader = config.module.rules.find(r => r.loader === 'vue-loader');
 
-			vueLoader.options.transformToRequire = {
-				video: ['src', 'poster'],
-				source: 'src'
-			};
+	// PWA module configuration: https://go.nuxtjs.dev/pwa
+	pwa: {
+		icon: {
+			iconFileName: manifestIcon,
 		},
+		meta: {
+			// mobileAppIOSオプションを有効にする前に、以下記事を一読すること。
+			// https://medium.com/@firt/dont-use-ios-web-app-meta-tag-irresponsibly-in-your-progressive-web-apps-85d70f4438cb
+			// mobileAppIOS: true
+		},
+		manifest: {
+			lang: lang,
+			name: siteName,
+			short_name: shortName,
+			description: siteDesc,
+			background_color: '#ffffff',
+			theme_color: themeColor,
+			display: 'standalone',
+			orientation: 'portrait',
+		},
+		workbox: {
+			// Page does not work offline 対策
+			// 'dev': true,
+			runtimeCaching: [
+				{
+					urlPattern: 'https://polyfill.io/.*',
+					handler: 'cacheFirst',
+				},
+				{
+					urlPattern: '^https://fonts.(?:googleapis|gstatic).com/(.*)',
+					handler: 'cacheFirst',
+				},
+				{
+					urlPattern: 'https://cdn.jsdelivr.net/.*',
+					handler: 'cacheFirst',
+				},
+				{
+					urlPattern: baseDir + '.*',
+					handler: 'staleWhileRevalidate',
+					strategyOptions: {
+						cacheName: 'my-cache',
+						cacheExpiration: {
+							maxAgeSeconds: 24 * 60 * 60 * 30,
+						},
+					},
+				},
+			],
+		},
+	},
+
+	// Build Configuration: https://go.nuxtjs.dev/config-build
+	build: {
+		// extend(config, { isServer }) {
+		// 	const vueLoader = config.module.rules.find(
+		// 		(r) => r.loader === 'vue-loader'
+		// 	);
+
+		// 	vueLoader.options.transformToRequire = {
+		// 		video: ['src', 'poster'],
+		// 		source: 'src',
+		// 	};
+		// },
 		postcss: {
-			plugins: {
-				'postcss-preset-env': {
-					autoprefixer: { grid: true }
-				}
-			}
+			preset: {
+				autoprefixer: { grid: 'autoplace' },
+			},
 		},
-		// plugins: [
-		// 	new webpack.ProvidePlugin({
-		// 		_: 'lodash'
-		// 	})
-		// ],
-		// transpile: [
-		// 	'vee-validate/dist/rules'
-		// ],
-		// vendor: [
-		// 	'vue-awesome-swiper'
-		// ]
 	},
-	workbox: {
-		// ↓基本的に「Page does not work offline」対策
-		// 'dev': true,
-		runtimeCaching: [
-			{
-				urlPattern: '^https://fonts.(?:googleapis|gstatic).com/(.*)',
-				handler: 'cacheFirst'
-			},
-			{
-				urlPattern: 'https://cdn.jsdelivr.net/.*',
-				handler: 'cacheFirst'
-			},
-			{
-				urlPattern: 'https://cdnjs.cloudflare.com/.*',
-				handler: 'cacheFirst'
-			},
-			{
-				urlPattern: 'https://cdn.materialdesignicons.com/.*',
-				handler: 'cacheFirst'
-			},
-			{
-				urlPattern: baseDir + '.*',
-				handler: 'staleWhileRevalidate',
-				strategyOptions: {
-					cacheName: 'my-cache',
-					cacheExpiration: {
-						maxAgeSeconds: 24 * 60 * 60 * 30
-					}
-				}
-			}
-		]
-	},
+
 	generate: {
-		fallback: true
-	}
+		fallback: true,
+	},
 };

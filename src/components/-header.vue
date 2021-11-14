@@ -3,26 +3,17 @@ header
 
 </template>
 
-<style lang="scss" scoped>
-
-</style>
-
 <script>
 import debounce from 'lodash/debounce';
 
 export default {
-	data () {
-		return {
-		};
+	data() {
+		return {};
 	},
-	mounted () {
-	},
-	beforeDestroy () {
-	},
+	mounted() {},
+	beforeDestroy() {},
 	methods: {
-		handleScroll: debounce(function () {
-
-		}, 50)
-	}
+		handleScroll: debounce(function () {}, 50),
+	},
 };
 </script>

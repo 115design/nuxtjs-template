@@ -1,15 +1,15 @@
 // state
 export const state = () => ({
 	page: 'index',
-	previousPage: 'index'
+	previousPage: 'index',
 });
 
 // mutations
 export const mutations = {
-	updatePage (state, pageName) {
+	updatePage(state, pageName) {
 		state.page = pageName;
 	},
-	updatePreviousPage (state, pageName) {
+	updatePreviousPage(state, pageName) {
 		state.previousPage = pageName;
-	}
+	},
 };

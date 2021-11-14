@@ -1,7 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template
 # Logs
-logs
+/logs
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -67,6 +67,10 @@ typings/
 
 # nuxt.js build output
 .nuxt
+report.*.json
+
+# Nuxt generate
+dist
 
 # vuepress build output
 .vuepress/dist
@@ -76,26 +80,12 @@ typings/
 
 # IDE / Editor
 .idea
-# .editorconfig
 
 # Service worker
 sw.*
 
-# Mac OSX
+# macOS
 .DS_Store
 
 # Vim swap files
 *.swp
-
-# Nuxt generate
-# dist
-# dist_*/
-
-# Service worker
-sw.*
-
-# @nuxtjs/sitemap
-sitemap.xml
-sitemap.xml.gz
-
-# *.mp4

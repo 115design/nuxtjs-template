@@ -1,15 +1,15 @@
-import cloneDeep from 'lodash/cloneDeep';
+// import cloneDeep from 'lodash/cloneDeep';
 
 export default ({ app }) => {
-	let isProduction = false;
-	let serverEnvironment = process.env.devName;
+	// const isProduction = false;
+	// const serverEnvironment = process.env.devName;
 
 	// 環境判定
-	const regex = new RegExp(process.env.prodRegexUrl, 'g');
-	if (regex.test(location.origin)) {
-		isProduction = true;
-		serverEnvironment = process.env.prodName;
-	}
+	// const regex = new RegExp(process.env.prodRegexUrl, 'g');
+	// if (regex.test(location.origin)) {
+	// 	isProduction = true;
+	// 	serverEnvironment = process.env.prodName;
+	// }
 
 	// 初回のみ実行
 

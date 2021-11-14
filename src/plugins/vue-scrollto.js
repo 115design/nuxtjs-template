@@ -5,5 +5,5 @@ Vue.use(VueScrollTo, {
 	duration: 700,
 	easing: 'ease',
 	offset: 0,
-	cancelable: false
+	cancelable: false,
 });
